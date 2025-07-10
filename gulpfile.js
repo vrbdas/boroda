@@ -1,79 +1,111 @@
-/* eslint-disable */
+/* eslint-env node */
 
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const autoprefixer = require('gulp-autoprefixer');
-const clean = require('gulp-clean');
 const cleanCSS = require('gulp-clean-css');
 const rename = require('gulp-rename');
 const htmlmin = require('gulp-htmlmin');
 const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config');
+const { deleteAsync } = require('del'); // ✅ исправление
 
-const destFolder = 'Boroda-dev';
+// Очистка папки dist
+gulp.task('clean', function () {
+  return deleteAsync(['dist']);
+});
 
-gulp.task('server', function() {
+// HTML
+gulp.task('html', function () {
+  console.log('===> html');
+  return gulp
+    .src('src/*.html')
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest('dist'));
+});
 
+// PHP
+gulp.task('php', function () {
+  console.log('===> php');
+  return gulp.src('src/*.php').pipe(gulp.dest('dist'));
+});
+
+// Стили
+gulp.task('styles', function () {
+  console.log('===> styles');
+  return gulp
+    .src('src/sass/**/*.+(scss|sass)')
+    .pipe(sourcemaps.init())
+    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(autoprefixer())
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/css'))
+    .pipe(browserSync.stream());
+});
+
+// Изображения
+gulp.task('images', function () {
+  console.log('===> images');
+  return gulp.src('src/img/**/*', { encoding: false }).pipe(gulp.dest('dist/img'));
+});
+
+// SVG
+gulp.task('svg', function () {
+  console.log('===> svg');
+  return gulp.src('src/svg/**/*').pipe(gulp.dest('dist/svg'));
+});
+
+// Шрифты
+gulp.task('fonts', function () {
+  console.log('===> fonts');
+  return gulp.src('src/fonts/**/*', { encoding: false }).pipe(gulp.dest('dist/fonts'));
+});
+
+// Webpack
+gulp.task('webpack', function (done) {
+  console.log('===> webpack');
+  webpack(webpackConfig, (err, stats) => {
+    if (err) console.error(err);
+    console.log(stats.toString({ colors: true, chunks: false }));
+    browserSync.reload();
+    done();
+  });
+});
+
+// Server + Watch
+gulp.task(
+  'server',
+  gulp.series('webpack', function () {
     browserSync.init({
-        proxy: `${destFolder}`
+      server: { baseDir: 'dist' }, // если нужен PHP, включи proxy ниже
+      // proxy: "http://site.loc",
+      files: ['dist/**/*.html', 'dist/**/*.css', 'dist/**/*.js'],
+      notify: false,
+      open: false,
     });
 
-    gulp.watch("src/index.html").on('change', browserSync.reload);
-    gulp.watch("src/js/bundle.js").on('change', browserSync.reload);
-});
+    gulp.watch('src/*.html', gulp.series('html'));
+    gulp.watch('src/*.php', gulp.series('php'));
+    gulp.watch('src/sass/**/*.+(scss|sass|css)', gulp.series('styles'));
+    gulp.watch('src/img/**/*', gulp.series('images'));
+    gulp.watch('src/svg/**/*', gulp.series('svg'));
+    gulp.watch('src/fonts/**/*', gulp.series('fonts'));
+    gulp.watch('src/js/**/*.js', gulp.series('webpack'));
+  })
+);
 
- 
-gulp.task('clean', function () {
-    return gulp.src(`C:/Code/domains/${destFolder}`, {read: false})
-        .pipe(clean({force: true}))
-  });
+// Сборка без запуска сервера
+gulp.task(
+  'build',
+  gulp.series(
+    'clean',
+    gulp.parallel('html', 'php', 'styles', 'images', 'svg', 'fonts', 'webpack')
+  )
+);
 
-gulp.task('styles', function() {
-    return gulp.src("src/sass/**/*.+(scss|sass)")
-        .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(rename({suffix: '.min', prefix: ''}))
-        .pipe(autoprefixer())
-        .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(`C:/Code/domains/${destFolder}/css`))
-        .pipe(browserSync.stream());
-});
-
-gulp.task('watch', function() {
-    gulp.watch("src/sass/**/*.+(scss|sass|css)", gulp.parallel('styles'));
-    gulp.watch("src/*.html").on('change', gulp.parallel('html'));
-    gulp.watch("src/js/**/*").on('change', gulp.parallel('scripts'));
-    gulp.watch("src/fonts/**/*").on('all', gulp.parallel('fonts'));
-    gulp.watch("src/svg/**/*").on('all', gulp.parallel('svg'));
-    gulp.watch("src/img/**/*").on('all', gulp.parallel('images'));
-});
-
-gulp.task('html', function () {
-    return gulp.src("src/*.html")
-        .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(gulp.dest(`C:/Code/domains/${destFolder}/`));
-});
-
-gulp.task('scripts', function () {
-    return gulp.src("src/js/bundle.+(*)")
-        .pipe(gulp.dest(`C:/Code/domains/${destFolder}/js`))
-});
-
-
-gulp.task('fonts', function () {
-    return gulp.src("src/fonts/**/*")
-        .pipe(gulp.dest(`C:/Code/domains/${destFolder}/fonts`))
-});
-
-gulp.task('svg', function () {
-    return gulp.src("src/svg/**/*")
-        .pipe(gulp.dest(`C:/Code/domains/${destFolder}/svg`))
-});
-
-gulp.task('images', function () {
-    return gulp.src("src/img/**/*")
-        .pipe(gulp.dest(`C:/Code/domains/${destFolder}/img`))
-});
-
-gulp.task('default', gulp.series('clean', gulp.parallel('server', 'styles', 'watch', 'html', 'scripts', 'fonts', 'svg',  'images')));
+// По умолчанию — сборка + сервер
+gulp.task('default', gulp.series('build', 'server'));

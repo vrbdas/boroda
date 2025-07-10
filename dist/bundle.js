@@ -1,60 +1,43 @@
-/******/ (function() { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/raw-loader/index.js!./src/js/background-check.min.js":
-/*!***************************************************************************!*\
-  !*** ./node_modules/raw-loader/index.js!./src/js/background-check.min.js ***!
-  \***************************************************************************/
-/***/ (function(module) {
+/***/ "./node_modules/expose-loader/dist/runtime/getGlobalThis.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/expose-loader/dist/runtime/getGlobalThis.js ***!
+  \******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = "/* BackgroundCheck\n   http://kennethcachia.com/background-check\n   v1.2.2 */\n\n!function(a,b){\"function\"==typeof define&&define.amd?define(b):a.BackgroundCheck=b(a)}(this,function(){\"use strict\";function a(a){if(void 0===a||void 0===a.targets)throw\"Missing attributes\";H.debug=d(a.debug,!1),H.debugOverlay=d(a.debugOverlay,!1),H.targets=g(a.targets),H.images=g(a.images||\"img\",!0),H.changeParent=d(a.changeParent,!1),H.threshold=d(a.threshold,50),H.minComplexity=d(a.minComplexity,30),H.minOverlap=d(a.minOverlap,50),H.windowEvents=d(a.windowEvents,!0),H.maxDuration=d(a.maxDuration,500),H.mask=d(a.mask,{r:0,g:255,b:0}),H.classes=d(a.classes,{dark:\"background--dark\",light:\"background--light\",complex:\"background--complex\"}),void 0===B&&(h(),B&&(C.style.position=\"fixed\",C.style.top=\"0px\",C.style.left=\"0px\",C.style.width=\"100%\",C.style.height=\"100%\",window.addEventListener(G,x.bind(null,function(){k(),w()})),window.addEventListener(\"scroll\",x.bind(null,w)),k(),w()))}function b(){B=null,C=null,D=null,H={},E&&clearTimeout(E)}function c(a){z(\"debug\")&&console.log(a)}function d(a,b){return e(a,typeof b),void 0===a?b:a}function e(a,b){if(void 0!==a&&typeof a!==b)throw\"Incorrect attribute type\"}function f(a){for(var b,d,e=[],f=0;f<a.length;f++)if(b=a[f],e.push(b),\"IMG\"!==b.tagName){if(d=window.getComputedStyle(b).backgroundImage,d.split(/,url|, url/).length>1)throw\"Multiple backgrounds are not supported\";if(!d||\"none\"===d)throw\"Element is not an <img> but does not have a background-image\";e[f]={img:new Image,el:e[f]},d=d.slice(4,-1),d=d.replace(/\"/g,\"\"),e[f].img.src=d,c(\"CSS Image - \"+d)}return e}function g(a,b){var c=a;if(\"string\"==typeof a?c=document.querySelectorAll(a):a&&1===a.nodeType&&(c=[a]),!c||0===c.length||void 0===c.length)throw\"Elements not found\";return b&&(c=f(c)),c=Array.prototype.slice.call(c)}function h(){C=document.createElement(\"canvas\"),C&&C.getContext?(D=C.getContext(\"2d\"),B=!0):B=!1,i()}function i(){z(\"debugOverlay\")?(C.style.opacity=.5,C.style.pointerEvents=\"none\",document.body.appendChild(C)):C.parentNode&&C.parentNode.removeChild(C)}function j(a){var d=(new Date).getTime()-a;c(\"Duration: \"+d+\"ms\"),d>z(\"maxDuration\")&&(console.log(\"BackgroundCheck - Killed\"),q(),b())}function k(){F={left:0,top:0,right:document.body.clientWidth,bottom:window.innerHeight},C.width=document.body.clientWidth,C.height=window.innerHeight}function l(a,b,c){var d,e;return-1!==a.indexOf(\"px\")?d=parseFloat(a):-1!==a.indexOf(\"%\")?(d=parseFloat(a),e=d/100,d=e*b,c&&(d-=c*e)):d=b,d}function m(a){var b=window.getComputedStyle(a.el);a.el.style.backgroundRepeat=\"no-repeat\",a.el.style.backgroundOrigin=\"padding-box\";var c=b.backgroundSize.split(\" \"),d=c[0],e=void 0===c[1]?\"auto\":c[1],f=a.el.clientWidth/a.el.clientHeight,g=a.img.naturalWidth/a.img.naturalHeight;\"cover\"===d?f>=g?(d=\"100%\",e=\"auto\"):(d=\"auto\",c[0]=\"auto\",e=\"100%\"):\"contain\"===d&&(1/g>1/f?(d=\"auto\",c[0]=\"auto\",e=\"100%\"):(d=\"100%\",e=\"auto\")),d=\"auto\"===d?a.img.naturalWidth:l(d,a.el.clientWidth),e=\"auto\"===e?d/a.img.naturalWidth*a.img.naturalHeight:l(e,a.el.clientHeight),\"auto\"===c[0]&&\"auto\"!==c[1]&&(d=e/a.img.naturalHeight*a.img.naturalWidth);var h=b.backgroundPosition;\"top\"===h?h=\"50% 0%\":\"left\"===h?h=\"0% 50%\":\"right\"===h?h=\"100% 50%\":\"bottom\"===h?h=\"50% 100%\":\"center\"===h&&(h=\"50% 50%\"),h=h.split(\" \");var i,j;return 4===h.length?(i=h[1],j=h[3]):(i=h[0],j=h[1]),j=j||\"50%\",i=l(i,a.el.clientWidth,d),j=l(j,a.el.clientHeight,e),4===h.length&&(\"right\"===h[0]&&(i=a.el.clientWidth-a.img.naturalWidth-i),\"bottom\"===h[2]&&(j=a.el.clientHeight-a.img.naturalHeight-j)),i+=a.el.getBoundingClientRect().left,j+=a.el.getBoundingClientRect().top,{left:Math.floor(i),right:Math.floor(i+d),top:Math.floor(j),bottom:Math.floor(j+e),width:Math.floor(d),height:Math.floor(e)}}function n(a){var b,c,d;if(a.nodeType){var e=a.getBoundingClientRect();b={left:e.left,right:e.right,top:e.top,bottom:e.bottom,width:e.width,height:e.height},d=a.parentNode,c=a}else b=m(a),d=a.el,c=a.img;d=d.getBoundingClientRect(),b.imageTop=0,b.imageLeft=0,b.imageWidth=c.naturalWidth,b.imageHeight=c.naturalHeight;var f,g=b.imageHeight/b.height;return b.top<d.top&&(f=d.top-b.top,b.imageTop=g*f,b.imageHeight-=g*f,b.top+=f,b.height-=f),b.left<d.left&&(f=d.left-b.left,b.imageLeft+=g*f,b.imageWidth-=g*f,b.width-=f,b.left+=f),b.bottom>d.bottom&&(f=b.bottom-d.bottom,b.imageHeight-=g*f,b.height-=f),b.right>d.right&&(f=b.right-d.right,b.imageWidth-=g*f,b.width-=f),b.imageTop=Math.floor(b.imageTop),b.imageLeft=Math.floor(b.imageLeft),b.imageHeight=Math.floor(b.imageHeight),b.imageWidth=Math.floor(b.imageWidth),b}function o(a){var b=n(a);a=a.nodeType?a:a.img,b.imageWidth>0&&b.imageHeight>0&&b.width>0&&b.height>0?D.drawImage(a,b.imageLeft,b.imageTop,b.imageWidth,b.imageHeight,b.left,b.top,b.width,b.height):c(\"Skipping image - \"+a.src+\" - area too small\")}function p(a,b,c){var d=a.className;switch(c){case\"add\":d+=\" \"+b;break;case\"remove\":var e=new RegExp(\"(?:^|\\\\s)\"+b+\"(?!\\\\S)\",\"g\");d=d.replace(e,\"\")}a.className=d.trim()}function q(a){for(var b,c=a?[a]:z(\"targets\"),d=0;d<c.length;d++)b=c[d],b=z(\"changeParent\")?b.parentNode:b,p(b,z(\"classes\").light,\"remove\"),p(b,z(\"classes\").dark,\"remove\"),p(b,z(\"classes\").complex,\"remove\")}function r(a){var b,d,e,f,g=a.getBoundingClientRect(),h=0,i=0,j=0,k=0,l=z(\"mask\");if(g.width>0&&g.height>0){q(a),a=z(\"changeParent\")?a.parentNode:a,d=D.getImageData(g.left,g.top,g.width,g.height).data;for(var m=0;m<d.length;m+=4)d[m]===l.r&&d[m+1]===l.g&&d[m+2]===l.b?k++:(h++,b=.2126*d[m]+.7152*d[m+1]+.0722*d[m+2],e=b-j,i+=e*e,j+=e/h);k<=d.length/4*(1-z(\"minOverlap\")/100)&&(f=Math.sqrt(i/h)/255,j/=255,c(\"Target: \"+a.className+\" lum: \"+j+\" var: \"+f),p(a,j<=z(\"threshold\")/100?z(\"classes\").dark:z(\"classes\").light,\"add\"),f>z(\"minComplexity\")/100&&p(a,z(\"classes\").complex,\"add\"))}}function s(a,b){return a=(a.nodeType?a:a.el).getBoundingClientRect(),b=b===F?b:(b.nodeType?b:b.el).getBoundingClientRect(),!(a.right<b.left||a.left>b.right||a.top>b.bottom||a.bottom<b.top)}function t(a){for(var b,c=(new Date).getTime(),d=a&&(\"IMG\"===a.tagName||a.img)?\"image\":\"targets\",e=a?!1:!0,f=z(\"targets\").length,g=0;f>g;g++)b=z(\"targets\")[g],s(b,F)&&(\"targets\"!==d||a&&a!==b?\"image\"===d&&s(b,a)&&r(b):(e=!0,r(b)));if(\"targets\"===d&&!e)throw a+\" is not a target\";j(c)}function u(a){var b=function(a){var b=0;return\"static\"!==window.getComputedStyle(a).position&&(b=parseInt(window.getComputedStyle(a).zIndex,10)||0,b>=0&&b++),b},c=a.parentNode,d=c?b(c):0,e=b(a);return 1e5*d+e}function v(a){var b=!1;return a.sort(function(a,c){a=a.nodeType?a:a.el,c=c.nodeType?c:c.el;var d=a.compareDocumentPosition(c),e=0;return a=u(a),c=u(c),a>c&&(b=!0),a===c&&2===d?e=1:a===c&&4===d&&(e=-1),e||a-c}),c(\"Sorted: \"+b),b&&c(a),b}function w(a,b,d){if(B){var e=z(\"mask\");c(\"--- BackgroundCheck ---\"),c(\"onLoad event: \"+(d&&d.src)),b!==!0&&(D.clearRect(0,0,C.width,C.height),D.fillStyle=\"rgb(\"+e.r+\", \"+e.g+\", \"+e.b+\")\",D.fillRect(0,0,C.width,C.height));for(var f,g,h=d?[d]:z(\"images\"),i=v(h),j=!1,k=0;k<h.length;k++)f=h[k],s(f,F)&&(g=f.nodeType?f:f.img,0===g.naturalWidth?(j=!0,c(\"Loading... \"+f.src),g.removeEventListener(\"load\",w),i?g.addEventListener(\"load\",w.bind(null,null,!1,null)):g.addEventListener(\"load\",w.bind(null,a,!0,f))):(c(\"Drawing: \"+f.src),o(f)));d||j?d&&t(d):t(a)}}function x(a){z(\"windowEvents\")===!0&&(E&&clearTimeout(E),E=setTimeout(a,200))}function y(a,b){if(void 0===H[a])throw\"Unknown property - \"+a;if(void 0===b)throw\"Missing value for \"+a;if(\"targets\"===a||\"images\"===a)try{b=g(\"images\"!==a||b?b:\"img\",\"images\"===a?!0:!1)}catch(c){throw b=[],c}else e(b,typeof H[a]);q(),H[a]=b,w(),\"debugOverlay\"===a&&i()}function z(a){if(void 0===H[a])throw\"Unknown property - \"+a;return H[a]}function A(){for(var a,b=z(\"images\"),c=[],d=0;d<b.length;d++)a=n(b[d]),c.push(a);return c}var B,C,D,E,F,G=void 0!==window.orientation?\"orientationchange\":\"resize\",H={};return{init:a,destroy:b,refresh:w,set:y,get:z,getImageData:A}});"
-
-/***/ }),
-
-/***/ "./node_modules/script-loader/addScript.js":
-/*!*************************************************!*\
-  !*** ./node_modules/script-loader/addScript.js ***!
-  \*************************************************/
-/***/ (function(module) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-module.exports = function(src) {
-	function log(error) {
-		(typeof console !== "undefined")
-		&& (console.error || console.log)("[Script Loader]", error);
-	}
-
-	// Check for IE =< 8
-	function isIE() {
-		return typeof attachEvent !== "undefined" && typeof addEventListener === "undefined";
-	}
-
-	try {
-		if (typeof execScript !== "undefined" && isIE()) {
-			execScript(src);
-		} else if (typeof eval !== "undefined") {
-			eval.call(null, src);
-		} else {
-			log("EvalError: No eval function available");
-		}
-	} catch (error) {
-		log(error);
-	}
-}
+"use strict";
 
 
-/***/ }),
+// eslint-disable-next-line func-names
+module.exports = function () {
+  if (typeof globalThis === "object") {
+    return globalThis;
+  }
+  var g;
+  try {
+    // This works if eval is allowed (see CSP)
+    // eslint-disable-next-line no-new-func
+    g = this || new Function("return this")();
+  } catch (e) {
+    // This works if the window reference is available
+    if (typeof window === "object") {
+      return window;
+    }
 
-/***/ "./node_modules/script-loader/index.js!./src/js/background-check.min.js":
-/*!******************************************************************************!*\
-  !*** ./node_modules/script-loader/index.js!./src/js/background-check.min.js ***!
-  \******************************************************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+    // This works if the self reference is available
+    if (typeof self === "object") {
+      return self;
+    }
 
-__webpack_require__(/*! !!./node_modules/script-loader/addScript.js */ "./node_modules/script-loader/addScript.js")(__webpack_require__(/*! !!./node_modules/raw-loader/index.js!./src/js/background-check.min.js */ "./node_modules/raw-loader/index.js!./src/js/background-check.min.js"))
+    // This works if the global reference is available
+    if (typeof __webpack_require__.g !== "undefined") {
+      return __webpack_require__.g;
+    }
+  }
+  return g;
+}();
 
 /***/ }),
 
@@ -62,7 +45,7 @@ __webpack_require__(/*! !!./node_modules/script-loader/addScript.js */ "./node_m
 /*!******************************************************!*\
   !*** ./node_modules/tiny-slider/dist/tiny-slider.js ***!
   \******************************************************/
-/***/ (function(__unused_webpack_module, exports) {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
@@ -3740,39 +3723,67 @@ exports.tns = tns;
 
 /***/ }),
 
+/***/ "./src/js/background-check.min-exposed.js":
+/*!************************************************!*\
+  !*** ./src/js/background-check.min-exposed.js ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var ___EXPOSE_LOADER_IMPORT___ = __webpack_require__(/*! -!./background-check.min.js */ "./src/js/background-check.min.js");
+var ___EXPOSE_LOADER_GET_GLOBAL_THIS___ = __webpack_require__(/*! ../../node_modules/expose-loader/dist/runtime/getGlobalThis.js */ "./node_modules/expose-loader/dist/runtime/getGlobalThis.js");
+var ___EXPOSE_LOADER_GLOBAL_THIS___ = ___EXPOSE_LOADER_GET_GLOBAL_THIS___;
+if (typeof ___EXPOSE_LOADER_GLOBAL_THIS___["BackgroundCheck"] === 'undefined') ___EXPOSE_LOADER_GLOBAL_THIS___["BackgroundCheck"] = ___EXPOSE_LOADER_IMPORT___;else throw new Error('[exposes-loader] The "BackgroundCheck" value exists in the global scope, it may not be safe to overwrite it, use the "override" option');
+module.exports = ___EXPOSE_LOADER_IMPORT___;
+
+/***/ }),
+
+/***/ "./src/js/background-check.min.js":
+/*!****************************************!*\
+  !*** ./src/js/background-check.min.js ***!
+  \****************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* BackgroundCheck
+   http://kennethcachia.com/background-check
+   v1.2.2 */
+
+!function(a,b){ true?!(__WEBPACK_AMD_DEFINE_FACTORY__ = (b),
+		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+		(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+		__WEBPACK_AMD_DEFINE_FACTORY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):0}(this,function(){"use strict";function a(a){if(void 0===a||void 0===a.targets)throw"Missing attributes";H.debug=d(a.debug,!1),H.debugOverlay=d(a.debugOverlay,!1),H.targets=g(a.targets),H.images=g(a.images||"img",!0),H.changeParent=d(a.changeParent,!1),H.threshold=d(a.threshold,50),H.minComplexity=d(a.minComplexity,30),H.minOverlap=d(a.minOverlap,50),H.windowEvents=d(a.windowEvents,!0),H.maxDuration=d(a.maxDuration,500),H.mask=d(a.mask,{r:0,g:255,b:0}),H.classes=d(a.classes,{dark:"background--dark",light:"background--light",complex:"background--complex"}),void 0===B&&(h(),B&&(C.style.position="fixed",C.style.top="0px",C.style.left="0px",C.style.width="100%",C.style.height="100%",window.addEventListener(G,x.bind(null,function(){k(),w()})),window.addEventListener("scroll",x.bind(null,w)),k(),w()))}function b(){B=null,C=null,D=null,H={},E&&clearTimeout(E)}function c(a){z("debug")&&console.log(a)}function d(a,b){return e(a,typeof b),void 0===a?b:a}function e(a,b){if(void 0!==a&&typeof a!==b)throw"Incorrect attribute type"}function f(a){for(var b,d,e=[],f=0;f<a.length;f++)if(b=a[f],e.push(b),"IMG"!==b.tagName){if(d=window.getComputedStyle(b).backgroundImage,d.split(/,url|, url/).length>1)throw"Multiple backgrounds are not supported";if(!d||"none"===d)throw"Element is not an <img> but does not have a background-image";e[f]={img:new Image,el:e[f]},d=d.slice(4,-1),d=d.replace(/"/g,""),e[f].img.src=d,c("CSS Image - "+d)}return e}function g(a,b){var c=a;if("string"==typeof a?c=document.querySelectorAll(a):a&&1===a.nodeType&&(c=[a]),!c||0===c.length||void 0===c.length)throw"Elements not found";return b&&(c=f(c)),c=Array.prototype.slice.call(c)}function h(){C=document.createElement("canvas"),C&&C.getContext?(D=C.getContext("2d"),B=!0):B=!1,i()}function i(){z("debugOverlay")?(C.style.opacity=.5,C.style.pointerEvents="none",document.body.appendChild(C)):C.parentNode&&C.parentNode.removeChild(C)}function j(a){var d=(new Date).getTime()-a;c("Duration: "+d+"ms"),d>z("maxDuration")&&(console.log("BackgroundCheck - Killed"),q(),b())}function k(){F={left:0,top:0,right:document.body.clientWidth,bottom:window.innerHeight},C.width=document.body.clientWidth,C.height=window.innerHeight}function l(a,b,c){var d,e;return-1!==a.indexOf("px")?d=parseFloat(a):-1!==a.indexOf("%")?(d=parseFloat(a),e=d/100,d=e*b,c&&(d-=c*e)):d=b,d}function m(a){var b=window.getComputedStyle(a.el);a.el.style.backgroundRepeat="no-repeat",a.el.style.backgroundOrigin="padding-box";var c=b.backgroundSize.split(" "),d=c[0],e=void 0===c[1]?"auto":c[1],f=a.el.clientWidth/a.el.clientHeight,g=a.img.naturalWidth/a.img.naturalHeight;"cover"===d?f>=g?(d="100%",e="auto"):(d="auto",c[0]="auto",e="100%"):"contain"===d&&(1/g>1/f?(d="auto",c[0]="auto",e="100%"):(d="100%",e="auto")),d="auto"===d?a.img.naturalWidth:l(d,a.el.clientWidth),e="auto"===e?d/a.img.naturalWidth*a.img.naturalHeight:l(e,a.el.clientHeight),"auto"===c[0]&&"auto"!==c[1]&&(d=e/a.img.naturalHeight*a.img.naturalWidth);var h=b.backgroundPosition;"top"===h?h="50% 0%":"left"===h?h="0% 50%":"right"===h?h="100% 50%":"bottom"===h?h="50% 100%":"center"===h&&(h="50% 50%"),h=h.split(" ");var i,j;return 4===h.length?(i=h[1],j=h[3]):(i=h[0],j=h[1]),j=j||"50%",i=l(i,a.el.clientWidth,d),j=l(j,a.el.clientHeight,e),4===h.length&&("right"===h[0]&&(i=a.el.clientWidth-a.img.naturalWidth-i),"bottom"===h[2]&&(j=a.el.clientHeight-a.img.naturalHeight-j)),i+=a.el.getBoundingClientRect().left,j+=a.el.getBoundingClientRect().top,{left:Math.floor(i),right:Math.floor(i+d),top:Math.floor(j),bottom:Math.floor(j+e),width:Math.floor(d),height:Math.floor(e)}}function n(a){var b,c,d;if(a.nodeType){var e=a.getBoundingClientRect();b={left:e.left,right:e.right,top:e.top,bottom:e.bottom,width:e.width,height:e.height},d=a.parentNode,c=a}else b=m(a),d=a.el,c=a.img;d=d.getBoundingClientRect(),b.imageTop=0,b.imageLeft=0,b.imageWidth=c.naturalWidth,b.imageHeight=c.naturalHeight;var f,g=b.imageHeight/b.height;return b.top<d.top&&(f=d.top-b.top,b.imageTop=g*f,b.imageHeight-=g*f,b.top+=f,b.height-=f),b.left<d.left&&(f=d.left-b.left,b.imageLeft+=g*f,b.imageWidth-=g*f,b.width-=f,b.left+=f),b.bottom>d.bottom&&(f=b.bottom-d.bottom,b.imageHeight-=g*f,b.height-=f),b.right>d.right&&(f=b.right-d.right,b.imageWidth-=g*f,b.width-=f),b.imageTop=Math.floor(b.imageTop),b.imageLeft=Math.floor(b.imageLeft),b.imageHeight=Math.floor(b.imageHeight),b.imageWidth=Math.floor(b.imageWidth),b}function o(a){var b=n(a);a=a.nodeType?a:a.img,b.imageWidth>0&&b.imageHeight>0&&b.width>0&&b.height>0?D.drawImage(a,b.imageLeft,b.imageTop,b.imageWidth,b.imageHeight,b.left,b.top,b.width,b.height):c("Skipping image - "+a.src+" - area too small")}function p(a,b,c){var d=a.className;switch(c){case"add":d+=" "+b;break;case"remove":var e=new RegExp("(?:^|\\s)"+b+"(?!\\S)","g");d=d.replace(e,"")}a.className=d.trim()}function q(a){for(var b,c=a?[a]:z("targets"),d=0;d<c.length;d++)b=c[d],b=z("changeParent")?b.parentNode:b,p(b,z("classes").light,"remove"),p(b,z("classes").dark,"remove"),p(b,z("classes").complex,"remove")}function r(a){var b,d,e,f,g=a.getBoundingClientRect(),h=0,i=0,j=0,k=0,l=z("mask");if(g.width>0&&g.height>0){q(a),a=z("changeParent")?a.parentNode:a,d=D.getImageData(g.left,g.top,g.width,g.height).data;for(var m=0;m<d.length;m+=4)d[m]===l.r&&d[m+1]===l.g&&d[m+2]===l.b?k++:(h++,b=.2126*d[m]+.7152*d[m+1]+.0722*d[m+2],e=b-j,i+=e*e,j+=e/h);k<=d.length/4*(1-z("minOverlap")/100)&&(f=Math.sqrt(i/h)/255,j/=255,c("Target: "+a.className+" lum: "+j+" var: "+f),p(a,j<=z("threshold")/100?z("classes").dark:z("classes").light,"add"),f>z("minComplexity")/100&&p(a,z("classes").complex,"add"))}}function s(a,b){return a=(a.nodeType?a:a.el).getBoundingClientRect(),b=b===F?b:(b.nodeType?b:b.el).getBoundingClientRect(),!(a.right<b.left||a.left>b.right||a.top>b.bottom||a.bottom<b.top)}function t(a){for(var b,c=(new Date).getTime(),d=a&&("IMG"===a.tagName||a.img)?"image":"targets",e=a?!1:!0,f=z("targets").length,g=0;f>g;g++)b=z("targets")[g],s(b,F)&&("targets"!==d||a&&a!==b?"image"===d&&s(b,a)&&r(b):(e=!0,r(b)));if("targets"===d&&!e)throw a+" is not a target";j(c)}function u(a){var b=function(a){var b=0;return"static"!==window.getComputedStyle(a).position&&(b=parseInt(window.getComputedStyle(a).zIndex,10)||0,b>=0&&b++),b},c=a.parentNode,d=c?b(c):0,e=b(a);return 1e5*d+e}function v(a){var b=!1;return a.sort(function(a,c){a=a.nodeType?a:a.el,c=c.nodeType?c:c.el;var d=a.compareDocumentPosition(c),e=0;return a=u(a),c=u(c),a>c&&(b=!0),a===c&&2===d?e=1:a===c&&4===d&&(e=-1),e||a-c}),c("Sorted: "+b),b&&c(a),b}function w(a,b,d){if(B){var e=z("mask");c("--- BackgroundCheck ---"),c("onLoad event: "+(d&&d.src)),b!==!0&&(D.clearRect(0,0,C.width,C.height),D.fillStyle="rgb("+e.r+", "+e.g+", "+e.b+")",D.fillRect(0,0,C.width,C.height));for(var f,g,h=d?[d]:z("images"),i=v(h),j=!1,k=0;k<h.length;k++)f=h[k],s(f,F)&&(g=f.nodeType?f:f.img,0===g.naturalWidth?(j=!0,c("Loading... "+f.src),g.removeEventListener("load",w),i?g.addEventListener("load",w.bind(null,null,!1,null)):g.addEventListener("load",w.bind(null,a,!0,f))):(c("Drawing: "+f.src),o(f)));d||j?d&&t(d):t(a)}}function x(a){z("windowEvents")===!0&&(E&&clearTimeout(E),E=setTimeout(a,200))}function y(a,b){if(void 0===H[a])throw"Unknown property - "+a;if(void 0===b)throw"Missing value for "+a;if("targets"===a||"images"===a)try{b=g("images"!==a||b?b:"img","images"===a?!0:!1)}catch(c){throw b=[],c}else e(b,typeof H[a]);q(),H[a]=b,w(),"debugOverlay"===a&&i()}function z(a){if(void 0===H[a])throw"Unknown property - "+a;return H[a]}function A(){for(var a,b=z("images"),c=[],d=0;d<b.length;d++)a=n(b[d]),c.push(a);return c}var B,C,D,E,F,G=void 0!==window.orientation?"orientationchange":"resize",H={};return{init:a,destroy:b,refresh:w,set:y,get:z,getImageData:A}});
+
+/***/ }),
+
 /***/ "./src/js/modules/menu.js":
 /*!********************************!*\
   !*** ./src/js/modules/menu.js ***!
   \********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "menu": function() { return /* binding */ menu; },
-/* harmony export */   "menuMobile": function() { return /* binding */ menuMobile; }
+/* harmony export */   menu: () => (/* binding */ menu),
+/* harmony export */   menuMobile: () => (/* binding */ menuMobile)
 /* harmony export */ });
 function menu(menuTriggerSelector, menuBlockSelector) {
   const menuTrigger = document.querySelector(menuTriggerSelector);
   const menuBlock = document.querySelector(menuBlockSelector);
-
   menuTrigger.addEventListener('click', () => {
     menuBlock.classList.toggle('active');
     menuTrigger.classList.toggle('active');
   });
-
   menuBlock.addEventListener('transitionend', () => {
     BackgroundCheck.refresh(); // обновляет скрипт BackgroundCheck (см. документацию к BackgroundCheck)
   });
 }
-
 function menuMobile(menuTriggerSelector, menuBlockSelector, menuCloseSelector, menuLinksSelector) {
   const menuTrigger = document.querySelectorAll(menuTriggerSelector);
   const menuBlock = document.querySelector(menuBlockSelector);
   const menuClose = document.querySelector(menuCloseSelector);
   const menuLinks = document.querySelectorAll(menuLinksSelector);
-
-  menuTrigger.forEach((item) => {
+  menuTrigger.forEach(item => {
     item.addEventListener('click', () => {
       menuBlock.classList.add('active');
       item.classList.add('active');
@@ -3789,26 +3800,22 @@ function menuMobile(menuTriggerSelector, menuBlockSelector, menuCloseSelector, m
   menuClose.addEventListener('click', () => {
     menuHide();
   });
-
-  menuLinks.forEach((item) => {
+  menuLinks.forEach(item => {
     item.addEventListener('click', () => {
       menuHide();
     });
   });
-
   menuBlock.addEventListener('transitionend', () => {
     BackgroundCheck.refresh(); // обновляет скрипт BackgroundCheck (см. документацию к BackgroundCheck)
   });
-
   function menuHide() {
     menuBlock.classList.remove('active');
-    menuTrigger.forEach((item) => {
+    menuTrigger.forEach(item => {
       item.classList.remove('active');
     });
     document.body.style.overflow = ''; // Возвращает прокрутку страницы
   }
 }
-
 
 
 
@@ -3818,18 +3825,20 @@ function menuMobile(menuTriggerSelector, menuBlockSelector, menuCloseSelector, m
 /*!**********************************!*\
   !*** ./src/js/modules/mining.js ***!
   \**********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 function mining() {
-
   const miningItems = document.querySelectorAll('.mining__item');
 
   // меняет классы по кругу с интервалом 6с
 
   let i = 0;
-  const timerId = setInterval(function() {
+  const timerId = setInterval(function () {
     if (i == miningItems.length) {
       i = 0;
     } else {
@@ -3841,23 +3850,20 @@ function mining() {
 
   // меняет классы по клику
 
-  miningItems.forEach((item) => {
+  miningItems.forEach(item => {
     item.addEventListener('click', () => {
       miningItemsRemoveActive();
       item.classList.add('mining__item_active');
       clearInterval(timerId); // после клика автопереключение останавливается
     });
   });
-
   function miningItemsRemoveActive() {
-    miningItems.forEach((item) => {
+    miningItems.forEach(item => {
       item.classList.remove('mining__item_active');
     });
   }
-
 }
-
-/* harmony default export */ __webpack_exports__["default"] = (mining);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mining);
 
 /***/ })
 
@@ -3881,7 +3887,7 @@ function mining() {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -3889,49 +3895,61 @@ function mining() {
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = function(module) {
+/******/ 		__webpack_require__.n = (module) => {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				function() { return module['default']; } :
-/******/ 				function() { return module; };
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 		__webpack_require__.d = (exports, definition) => {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	!function() {
-/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
-/******/ 	}();
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = function(exports) {
+/******/ 		__webpack_require__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-!function() {
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+(() => {
 "use strict";
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -3940,30 +3958,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tiny_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tiny-slider */ "./node_modules/tiny-slider/dist/tiny-slider.js");
 /* harmony import */ var _modules_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/menu */ "./src/js/modules/menu.js");
 /* harmony import */ var _modules_mining__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/mining */ "./src/js/modules/mining.js");
-/* harmony import */ var script_loader_background_check_min_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! script-loader!./background-check.min.js */ "./node_modules/script-loader/index.js!./src/js/background-check.min.js");
-/* harmony import */ var script_loader_background_check_min_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(script_loader_background_check_min_js__WEBPACK_IMPORTED_MODULE_3__);
-
+/* harmony import */ var _background_check_min_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./background-check.min.js */ "./src/js/background-check.min-exposed.js");
+/* harmony import */ var _background_check_min_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_background_check_min_js__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
 
 window.addEventListener('DOMContentLoaded', () => {
-
-  BackgroundCheck.refresh(); // обновляет скрипт BackgroundCheck при перезагрузке страницы (см. документацию к BackgroundCheck)
-
-  // вкладки в секции mining
-
+  BackgroundCheck.refresh();
   (0,_modules_mining__WEBPACK_IMPORTED_MODULE_2__["default"])();
-
-  // меню навигации
-
   (0,_modules_menu__WEBPACK_IMPORTED_MODULE_1__.menu)('.promo__menu-hamburger', '.promo__menu-items');
   (0,_modules_menu__WEBPACK_IMPORTED_MODULE_1__.menu)('.mining__menu-hamburger', '.mining__menu-items');
   (0,_modules_menu__WEBPACK_IMPORTED_MODULE_1__.menuMobile)('.mobile__hamburger', '.menu-mobile', '.menu-mobile__close', '.menu-mobile__item');
-
-  // tiny slider
-
   const slider = (0,tiny_slider__WEBPACK_IMPORTED_MODULE_0__.tns)({
     container: '.tns',
     items: 1,
@@ -3977,39 +3984,29 @@ window.addEventListener('DOMContentLoaded', () => {
     autoplayTimeout: 9000,
     autoplayHoverPause: false,
     autoplayButton: false,
-    autoplayButtonOutput: false,
+    autoplayButtonOutput: false
   });
-
-  // костыль для tns-слайдера, в котором нет функции счетчика слайдов. воспользовался навигационными точками(dots), включил их в настройках слайдера и скрыл с помощью css (.tns-nav) display: none;
-
-  let slideCurrent = 1; // номер текущего слайда, в начале равен 1
-  const slideBtns = document.querySelectorAll('.promo__controls-prev, .promo__controls-next'); // кнопки переключения слайдов
-  const slideTotal = document.querySelectorAll('[data-nav]').length; // общее число слайдов, равно количеству нав. точек
-  const slideCounter = document.querySelector('.promo__controls-counter'); // блок со счетчиком слайдов
-
-  slideCounter.textContent = `${slideCurrent} / ${slideTotal}`; // выставляет начальное значение
-
-  slideBtns.forEach((item) => { // при нажатии на кнопки обновляет номер текущего слайда
+  let slideCurrent = 1;
+  const slideBtns = document.querySelectorAll('.promo__controls-prev, .promo__controls-next');
+  const slideTotal = document.querySelectorAll('[data-nav]').length;
+  const slideCounter = document.querySelector('.promo__controls-counter');
+  slideCounter.textContent = `${slideCurrent} / ${slideTotal}`;
+  slideBtns.forEach(item => {
     item.addEventListener('click', () => {
-      slideCurrent = +document.querySelector('.tns-nav-active').getAttribute('data-nav') + 1; // берет значение data-nav из активной точки, добавляет 1, потому что там счетчик идет от 0
+      slideCurrent = +document.querySelector('.tns-nav-active').getAttribute('data-nav') + 1;
       slideCounter.textContent = `${slideCurrent} / ${slideTotal}`;
     });
   });
-
-  slider.events.on('transitionEnd', () => { // подписывается на событие окончания перелистывания слайда (см. документацию к tns)
-    BackgroundCheck.refresh(); // обновляет скрипт BackgroundCheck (см. документацию к BackgroundCheck)
+  slider.events.on('transitionEnd', () => {
+    BackgroundCheck.refresh();
   });
-
-  // BackgroundCheck
-
   BackgroundCheck.init({
     targets: '.promo__controls-counter, .promo__controls-prev, .promo__controls-next, .menu__item, .menu__hamburger, .mobile__hamburger, .promo__breadcrumbs-link, .divider-mobile, .promo__title'
   });
   BackgroundCheck.set('threshold', 80);
-
 });
+})();
 
-}();
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map

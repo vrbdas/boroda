@@ -1,42 +1,35 @@
-'use strict';
-
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   entry: './src/js/script.js',
   output: {
     filename: 'bundle.js',
-    path: `${__dirname}/src/js`,
+    path: path.resolve(__dirname, 'dist'),
   },
-  watch: true,
-  optimization: {
-    minimize: false,
-    minimizer: [new TerserPlugin()],
-  },
-
-  devtool: 'source-map',
-
   module: {
-    // rules: [
-    //   {
-    //     test: /\.(?:js|mjs|cjs)$/,
-    //     exclude: /node_modules/,
-    //     use: {
-    //       loader: 'babel-loader',
-    //       options: {
-    //         presets: [
-    //           ['@babel/preset-env', {
-    //             targets: 'ie 11',
-    //             debug: false,
-    //             corejs: 3.30,
-    //             useBuiltIns: 'usage',
-    //           }],
-    //         ],
-    //       },
-    //     },
-    //   },
-    // ],
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+      {
+        test: /background-check\.min\.js$/,
+        include: path.resolve(__dirname, 'src/js'),
+        use: {
+          loader: 'expose-loader',
+          options: {
+            exposes: ['BackgroundCheck'],
+          },
+        },
+      },
+    ],
   },
+  devtool: 'source-map',
 };
